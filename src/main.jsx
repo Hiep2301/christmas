@@ -16,11 +16,13 @@ import NProgress from "nprogress";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import PrivateRoute from "./utils/PrivateRoute.jsx";
 
 import "react-toastify/dist/ReactToastify.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import "nprogress/nprogress.css";
 import "./index.css";
-import PrivateRoute from "./routes/PrivateRoute.jsx";
+import AllDetails from "./pages/AllDetails/AllDetails.jsx";
 
 NProgress.configure({
   showSpinner: false,
@@ -38,9 +40,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route element={<PrivateRoute />}>
                 <Route index element={<Home />} />
                 <Route path="template" element={<Template />} />
-                <Route path="/swap-face" element={<SwapFace />} />
-                <Route path="/swap-video" element={<SwapVideo />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="swap-face" element={<SwapFace />} />
+                <Route path="swap-video" element={<SwapVideo />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="all-details" element={<AllDetails />} />
               </Route>
             </Route>
 

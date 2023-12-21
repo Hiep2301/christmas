@@ -112,13 +112,13 @@ function SignIn() {
               <form onSubmit={handleSubmit}>
                 <div className="mx-5 mt-6 max-md:mx-2.5">
                   <div className="mb-2 text-base font-medium text-gray-900">
-                    Email
+                    Email or Username
                   </div>
                   <input
                     type="text"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    placeholder="Email@gmail.com"
+                    placeholder="Email or Username"
                     className="w-full py-4 pl-5 pr-12 text-base font-light text-gray-500 border border-gray-400 border-solid rounded-xl"
                   />
                 </div>

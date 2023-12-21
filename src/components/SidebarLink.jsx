@@ -20,6 +20,7 @@ function SidebarLink({ to, activeIcon, defaultIcon, label, isActive }) {
         <img
           loading="lazy"
           src={isActive || isHovered ? activeIcon : defaultIcon}
+          alt=""
         />
         <div className="font-semibold grow">{label}</div>
       </div>

@@ -1,5 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { doLogout } from "../redux/action/userAction";
+import { toast } from "react-toastify";
 import SidebarLink from "./SidebarLink";
 import HomeIcon from "../assets/HomeIcon.svg";
 import MenuIcon from "../assets/MenuIcon.svg";
@@ -20,9 +23,15 @@ function SideBar() {
 
   const navigate = useNavigate();
 
+  const [searchParams] = useSearchParams();
+
+  const dispatch = useDispatch();
+
   const [isLogOutHovered, setIsLogOutHovered] = useState(false);
 
   function handleLogOut() {
+    toast.success("Logout success");
+    dispatch(doLogout());
     navigate("/signin");
   }
 
@@ -49,14 +58,22 @@ function SideBar() {
             activeIcon={GalleryIconActive}
             defaultIcon={GalleryIcon}
             label="Swap Face"
-            isActive={currentPath === "/swap-face"}
+            isActive={
+              currentPath === "/swap-face" ||
+              (currentPath === "/all-details" &&
+                searchParams.get("type") === "image")
+            }
           />
           <SidebarLink
             to="/swap-video"
             activeIcon={VideoIconActive}
             defaultIcon={VideoIcon}
             label="Swap Video"
-            isActive={currentPath === "/swap-video"}
+            isActive={
+              currentPath === "/swap-video" ||
+              (currentPath === "/all-details" &&
+                searchParams.get("type") === "video")
+            }
           />
         </div>
         <div className="flex flex-col m-5">
@@ -67,7 +84,7 @@ function SideBar() {
             label="Profile"
             isActive={currentPath === "/profile"}
           />
-          <div
+          <button
             className={`flex flex-col mt-4 pl-4 pr-11 py-2.5 rounded-lg whitespace-nowrap cursor-pointer ${
               isLogOutHovered
                 ? "bg-red-400 text-rose-100"
@@ -81,10 +98,11 @@ function SideBar() {
               <img
                 loading="lazy"
                 src={isLogOutHovered ? LogOutIconActive : LogOutIcon}
+                alt=""
               />
               <div className="font-semibold grow">Log out</div>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </>
